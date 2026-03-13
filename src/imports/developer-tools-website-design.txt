@@ -1,0 +1,301 @@
+Design a complete modern "Developer Tools Website" UI in Figma.
+
+Goal:
+Create a clean, fast, SEO-friendly developer tools website where users can use tools directly in the browser. No backend required. All tools run client-side.
+
+Target audience:
+Web developers, programmers, and tech users.
+
+Design style:
+
+Modern developer-focused interface
+
+Inspired by Vercel, shadcn/ui, Tailwind UI
+
+Clean minimal layout
+
+Soft shadows and rounded corners
+
+Grid-based layout
+
+Dark mode and light mode
+
+Smooth hover animations
+
+Responsive design (desktop, tablet, mobile)
+
+Color style:
+
+Neutral developer palette
+
+Background: dark slate / white
+
+Accent: blue or purple
+
+High contrast for readability
+
+Typography:
+
+Modern sans-serif fonts
+
+Code blocks using monospace font
+
+Clear hierarchy (H1, H2, H3)
+
+MAIN PAGES TO DESIGN
+
+Landing Page
+Sections:
+
+Hero Section
+Headline:
+"Free Online Developer Tools"
+
+Subtext:
+"Fast, simple tools for developers. Format, convert, and generate code instantly."
+
+Elements:
+
+Search bar for tools
+
+Popular tools grid
+
+Code preview illustration
+
+Call-to-action button: "Browse Tools"
+
+Features Section
+Show benefits:
+
+No login required
+
+100% browser based
+
+Fast and lightweight
+
+Developer friendly
+
+Popular Tools Section
+Cards for:
+
+JSON Formatter
+
+CSS Minifier
+
+Base64 Encoder
+
+UUID Generator
+
+Regex Tester
+
+Color Converter
+
+Footer
+Links:
+
+About
+
+Privacy Policy
+
+Contact
+
+Terms
+
+Sitemap
+
+Tools Directory Page
+
+Layout:
+
+Left sidebar categories
+
+Main grid area with tool cards
+
+Search bar on top
+
+Categories:
+
+Text Tools
+
+Word Counter
+
+Case Converter
+
+Remove Duplicate Lines
+
+Developer Tools
+
+JSON Formatter
+
+CSS Minifier
+
+HTML Formatter
+
+Regex Tester
+
+Encoding Tools
+
+Base64 Encode / Decode
+
+URL Encode / Decode
+
+Generator Tools
+
+UUID Generator
+
+Password Generator
+
+Converter Tools
+
+Timestamp Converter
+
+Color Converter
+
+Unit Converter
+
+Tool Cards Design:
+
+Tool icon
+
+Tool name
+
+Short description
+
+Hover animation
+
+Tool Page Layout
+
+Example tool: JSON Formatter
+
+Page layout:
+
+Title
+JSON Formatter Tool
+
+Description
+Format and validate JSON instantly.
+
+Input panel
+Textarea where user pastes JSON
+
+Output panel
+Formatted JSON preview
+
+Buttons
+Format
+Copy
+Clear
+
+Extra UI:
+Error message display
+Copy result button
+
+Code style preview
+Monospace font block
+
+Search System UI
+
+Search bar with live results.
+
+Example:
+Search tools...
+
+Dropdown results:
+JSON Formatter
+CSS Minifier
+Base64 Encoder
+
+SEO Friendly Layout
+
+Design each tool page with:
+
+Title
+Description
+Usage instructions
+Example section
+FAQ section
+
+Example sections:
+
+How to use JSON Formatter
+Benefits of formatting JSON
+Common errors in JSON
+
+Documentation Section
+
+Pages:
+
+Getting Started
+How tools work
+Developer guides
+API explanation (optional)
+
+UI Components Design System
+
+Create reusable components:
+
+Buttons
+Inputs
+Cards
+Tool panels
+Sidebar navigation
+Search bar
+Code block
+Alert messages
+Copy button
+
+Animations
+
+Subtle animations:
+
+Hover tool cards
+Button press animation
+Loading spinner
+Smooth page transitions
+
+Responsive Design
+
+Create layouts for:
+
+Desktop
+Tablet
+Mobile
+
+Extra Features
+
+Dark / Light mode toggle
+Sticky navigation bar
+Tool copy result button
+Clean grid layout
+Fast loading UI
+
+Deliverables in Figma:
+
+Complete design system
+Landing page
+Tools directory page
+Tool page template
+Documentation page
+Mobile responsive layouts
+
+The design must be developer-friendly and easily convertible into a Next.js and React frontend project.
+
+💡 কিছু SEO টিপস (এই project এর জন্য)
+
+তুমি যখন site বানাবে:
+
+প্রতিটা tool এর আলাদা URL
+
+/tools/json-formatter
+/tools/css-minifier
+/tools/base64-encoder
+
+tool page এ থাকবে
+
+description
+
+how to use
+
+example
+
+এগুলো Google ranking বাড়াতে সাহায্য করে।
