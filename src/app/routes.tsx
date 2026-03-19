@@ -2,11 +2,13 @@ import { ComponentType } from "react";
 import { Home } from "./pages/Home";
 import { ToolsDirectory } from "./pages/ToolsDirectory";
 import { Blog } from "./pages/Blog";
+import { BlogPost } from "./pages/BlogPost";
 import { AboutUs } from "./pages/AboutUs";
 import { ContactUs } from "./pages/ContactUs";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { TermsAndConditions } from "./pages/TermsAndConditions";
 import { Disclaimer } from "./pages/Disclaimer";
+import { blogPosts } from "./data/blogPosts";
 import { JsonFormatter } from "./pages/tools/JsonFormatter";
 import { CssMinifier } from "./pages/tools/CssMinifier";
 import { Base64Encoder } from "./pages/tools/Base64Encoder";
@@ -119,6 +121,15 @@ const defaultMeta: RouteMeta = {
   description: "Fast, mobile-friendly, privacy-first developer utilities with premium UI.",
 };
 
+// Generate blog metadata
+const blogMetaMap: Record<string, RouteMeta> = {};
+blogPosts.forEach((post) => {
+  blogMetaMap[`/blog/${post.slug}`] = {
+    title: `${post.title} | Blog | Softtooles`,
+    description: `${post.excerpt} - Read more about ${post.category} on Softtooles blog.`,
+  };
+});
+
 export const routeMetaMap: Record<string, RouteMeta> = {
   "/": {
     title: "Softtooles - Developer Tools",
@@ -156,6 +167,7 @@ export const routeMetaMap: Record<string, RouteMeta> = {
     title: "Disclaimer | Softtooles",
     description: "Read the Softtooles disclaimer and limitations of tool usage.",
   },
+  ...blogMetaMap,
 };
 
 export function resolveRouteComponent(pathname: string): ComponentType {
@@ -167,6 +179,15 @@ export function resolveRouteComponent(pathname: string): ComponentType {
     ? pathname.slice(0, -1)
     : pathname;
 
+  // Check for blog post routes
+  if (normalizedPath.startsWith("/blog/")) {
+    const slug = normalizedPath.replace("/blog/", "");
+    if (blogPosts.some((post) => post.slug === slug)) {
+      // Return a wrapper component that passes the slug to BlogPost
+      return () => <BlogPost slug={slug} />;
+    }
+  }
+
   return routeComponentMap[normalizedPath] ?? NotFound;
 }
 
@@ -175,6 +196,7 @@ export function resolveRouteMeta(pathname: string): RouteMeta {
     ? pathname.slice(0, -1)
     : pathname;
 
+  // Check in merged routeMetaMap first (includes blog metadata)
   if (routeMetaMap[normalizedPath]) {
     return routeMetaMap[normalizedPath];
   }

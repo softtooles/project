@@ -77,12 +77,12 @@ const features = [
   {
     icon: Zap,
     title: "Ultra Fast",
-    description: "সব টুল ইনস্ট্যান্ট প্রসেসিং সহ ব্রাউজারেই চলে",
+    description: "Every tool runs with instant browser-based processing for a fast workflow.",
   },
   {
     icon: Lock,
     title: "Private by Default",
-    description: "তোমার ডেটা তোমার কাছেই থাকে, external processing ছাড়াই",
+    description: "Your data stays with you, without relying on external processing.",
   },
   {
     icon: Layers3,
@@ -92,7 +92,7 @@ const features = [
   {
     icon: Rocket,
     title: "No Setup",
-    description: "কোনো account বা config ছাড়াই সঙ্গে সঙ্গে কাজ শুরু",
+    description: "Start working immediately with no account creation or setup friction.",
   },
 ];
 
@@ -126,8 +126,8 @@ export function Home() {
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-xl">
-                premium look, advanced motion, এবং ultra-fast online tools। সবকিছু mobile-ready,
-                SEO-friendly এবং privacy-first architecture দিয়ে তৈরি।
+                A premium interface, advanced motion, and ultra-fast online tools built for mobile-ready,
+                SEO-friendly, privacy-first workflows.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
