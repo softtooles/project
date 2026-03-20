@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { resolveRouteComponent, resolveRouteMeta } from "@/app/routes";
+import { ToolDetailsSection } from "@/app/components/ToolDetailsSection";
+import { isToolRoute, resolveRouteComponent, resolveRouteMeta } from "@/app/routes";
 
 interface CatchAllPageProps {
   slug?: string[];
@@ -11,6 +12,7 @@ const CatchAllPage: NextPage<CatchAllPageProps> = ({ slug }) => {
   const PageComponent = resolveRouteComponent(pathname);
   const meta = resolveRouteMeta(pathname);
   const canonicalUrl = `https://softtools.studio${pathname}`;
+  const showToolDetails = pathname.startsWith("/tools/") && isToolRoute(pathname);
 
   return (
     <>
@@ -35,7 +37,14 @@ const CatchAllPage: NextPage<CatchAllPageProps> = ({ slug }) => {
         <meta name="twitter:image" content="/logo.png?v=2" />
         <link rel="canonical" href={canonicalUrl} />
       </Head>
-      <PageComponent />
+      <>
+        <PageComponent />
+        {showToolDetails && (
+          <div className="container mx-auto px-4 lg:px-8 max-w-7xl pb-12">
+            <ToolDetailsSection pathname={pathname} />
+          </div>
+        )}
+      </>
     </>
   );
 };

@@ -111,6 +111,15 @@ export const routeComponentMap: Record<string, ComponentType> = {
   "/tools/gradient-generator": GradientGenerator,
 };
 
+const toolRoutePaths = Object.keys(routeComponentMap).filter(
+  (path) => path.startsWith("/tools/")
+);
+const toolRoutePathSet = new Set(toolRoutePaths);
+
+export function isToolRoute(pathname: string): boolean {
+  return toolRoutePathSet.has(pathname);
+}
+
 interface RouteMeta {
   title: string;
   description: string;
