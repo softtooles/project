@@ -58,7 +58,7 @@ export function Footer() {
                 <Link href="/terms-and-conditions" className="hover:text-foreground transition-colors">Terms & Conditions</Link>
               </li>
               <li>
-                <Link href="/contact-us" className="hover:text-foreground transition-colors">Contact Us</Link>
+                <Link href="/disclaimer" className="hover:text-foreground transition-colors">Disclaimer</Link>
               </li>
             </ul>
           </div>
