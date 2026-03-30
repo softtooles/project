@@ -54,6 +54,12 @@ import { JwtDecoder } from "./pages/tools/JwtDecoder";
 import { XmlFormatter } from "./pages/tools/XmlFormatter";
 import { SqlFormatter } from "./pages/tools/SqlFormatter";
 import { NotFound } from "./pages/NotFound";
+import { ToolVariantPage } from "./pages/ToolVariantPage";
+import {
+  generateVariantDescription,
+  generateVariantTitle,
+  getVariantRecordFromPathname,
+} from "./seo/toolVariantSystem";
 
 export const routeComponentMap: Record<string, ComponentType> = {
   "/": Home,
@@ -188,6 +194,15 @@ export function resolveRouteComponent(pathname: string): ComponentType {
     ? pathname.slice(0, -1)
     : pathname;
 
+  // Programmatic SEO variant routes:
+  // /tools/{baseToolSlug}/{variantSlug}
+  if (normalizedPath.startsWith("/tools/")) {
+    const variantRecord = getVariantRecordFromPathname(normalizedPath);
+    if (variantRecord) {
+      return () => <ToolVariantPage pathname={normalizedPath} />;
+    }
+  }
+
   // Check for blog post routes
   if (normalizedPath.startsWith("/blog/")) {
     const slug = normalizedPath.replace("/blog/", "");
@@ -204,6 +219,16 @@ export function resolveRouteMeta(pathname: string): RouteMeta {
   const normalizedPath = pathname.endsWith("/") && pathname !== "/"
     ? pathname.slice(0, -1)
     : pathname;
+
+  // Programmatic SEO variant routes:
+  // /tools/{baseToolSlug}/{variantSlug}
+  const variantRecord = getVariantRecordFromPathname(normalizedPath);
+  if (variantRecord) {
+    return {
+      title: generateVariantTitle(variantRecord),
+      description: generateVariantDescription(variantRecord),
+    };
+  }
 
   // Check in merged routeMetaMap first (includes blog metadata)
   if (routeMetaMap[normalizedPath]) {

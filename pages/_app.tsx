@@ -10,6 +10,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="icon" href="/logo.png?v=2" />
         <meta name="theme-color" content="#12b5d0" />
+        <meta
+          name="google-site-verification"
+          content="Ed-SdrFPMFrE46VBzMnHc4yQ2uOgE7OSJjXjeIG9xUU"
+        />
       </Head>
       <Root>
         <Component {...pageProps} />

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Keep APIs crawlable only if needed; sitemap is enough for indexing.
+Disallow: /api/
+
+Sitemap: https://softtooles.com/sitemap.xml
+
