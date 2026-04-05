@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "node ./node_modules/next/dist/bin/next dev",
     "build": "node ./node_modules/next/dist/bin/next build",
-    "start": "node ./node_modules/next/dist/bin/next start"
+    "start": "node ./node_modules/next/dist/bin/next start",
+    "gsc:indexing-batches": "node ./scripts/gsc-nested-zips-to-indexing-json.mjs",
+    "site:urls-json": "node ./node_modules/tsx/dist/cli.mjs ./scripts/export-all-site-urls.ts",
+    "indexing:all-json": "npm run site:urls-json && npm run gsc:indexing-batches"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -72,7 +75,9 @@
     "@types/node": "25.5.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "adm-zip": "^0.5.17",
     "tailwindcss": "4.1.12",
+    "tsx": "^4.21.0",
     "typescript": "5.8.3"
   },
   "pnpm": {}

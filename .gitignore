@@ -22,3 +22,7 @@ Thumbs.db
 
 .vscode/
 .idea/
+
+# GSC zip pipeline (local extract cache only)
+gsc-zips-inbox/.extract-work/
+zip/.extract-work/

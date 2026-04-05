@@ -2,8 +2,13 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { ToolDetailsSection } from "@/app/components/ToolDetailsSection";
 import { blogPosts } from "@/app/data/blogPosts";
+import {
+  buildBaseToolFaqJsonLd,
+  buildSoftwareApplicationJsonLd,
+  isBaseToolPathname,
+} from "@/app/seo/baseToolJsonLd";
 import { isToolRoute, resolveRouteComponent, resolveRouteMeta, routeComponentMap } from "@/app/routes";
-import { getTopVariantPaths } from "@/app/seo/toolVariantSystem";
+import { getTopVariantPaths, PROGRAMMATIC_SEO_VARIANT_LIMIT } from "@/app/seo/toolVariantSystem";
 
 interface CatchAllPageProps {
   slug?: string[];
@@ -19,6 +24,15 @@ const CatchAllPage: NextPage<CatchAllPageProps> = ({ slug }) => {
   const canonicalUrl = `${baseUrl}${pathname === "/" ? "/" : pathname}`;
   const meta = generateMetadataForPathname(pathname);
   const showToolDetails = pathname.startsWith("/tools/") && isToolRoute(pathname);
+  const baseToolSchema =
+    isBaseToolPathname(pathname) && isToolRoute(pathname)
+      ? {
+          software: buildSoftwareApplicationJsonLd(pathname, meta),
+          faq: buildBaseToolFaqJsonLd(
+            meta.title.replace(/\s*\|\s*Softtooles.*$/i, "").trim() || pathname,
+          ),
+        }
+      : null;
 
   return (
     <>
@@ -26,6 +40,7 @@ const CatchAllPage: NextPage<CatchAllPageProps> = ({ slug }) => {
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
         <meta name="google-adsense-account" content="ca-pub-6353972195838916" />
         <script
@@ -38,13 +53,26 @@ const CatchAllPage: NextPage<CatchAllPageProps> = ({ slug }) => {
         <meta property="og:description" content={meta.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="/logo.png?v=2" />
+        <meta property="og:image" content={`${baseUrl}/logo.png?v=2`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="/logo.png?v=2" />
+        <meta name="twitter:image" content={`${baseUrl}/logo.png?v=2`} />
 
         <link rel="canonical" href={canonicalUrl} />
+
+        {baseToolSchema && (
+          <>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(baseToolSchema.software) }}
+            />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(baseToolSchema.faq) }}
+            />
+          </>
+        )}
       </Head>
       <>
         <PageComponent />
@@ -78,13 +106,13 @@ export async function getStaticPaths() {
     paths.push({ params });
   }
 
-  // Programmatic SEO: pre-render top 1000 tool variants.
+  // Programmatic SEO: pre-render top N tool variants (see PROGRAMMATIC_SEO_VARIANT_LIMIT).
   const baseToolSlugs = Object.keys(routeComponentMap)
     .filter((p) => p.startsWith("/tools/"))
     .map((p) => p.replace("/tools/", ""))
     .concat(["image-converter"]);
 
-  const topVariantPaths = getTopVariantPaths(baseToolSlugs, 1000);
+  const topVariantPaths = getTopVariantPaths(baseToolSlugs, PROGRAMMATIC_SEO_VARIANT_LIMIT);
   for (const variantPathname of topVariantPaths) {
     const params = pathnameToCatchAllParams(variantPathname);
     paths.push({ params });

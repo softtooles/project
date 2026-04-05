@@ -26,6 +26,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/variant-hub" className="hover:text-foreground transition-colors">
+                  Tool landing pages
+                </Link>
+              </li>
+              <li>
                 <Link href="/blog" className="hover:text-foreground transition-colors">
                   Blog
                 </Link>

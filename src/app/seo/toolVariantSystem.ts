@@ -11,6 +11,12 @@ export type ToolVariantRecord = {
 
 const baseUrl = "https://softtooles.com";
 
+/**
+ * Keep sitemap and SSG path pre-render cap aligned so crawlers do not prefer URLs the build rarely warms.
+ * Set above 5000 so the public URL set clearly exceeds a 5k indexing goal even after deduping/noise.
+ */
+export const PROGRAMMATIC_SEO_VARIANT_LIMIT = 5500;
+
 function slugify(input: string): string {
   return input
     .toLowerCase()
